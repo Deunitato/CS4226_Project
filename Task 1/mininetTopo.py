@@ -18,7 +18,7 @@ net = None
 class TreeTopo(Topo):		
 	def __init__(self):
 		# Initialize topology
-            Topo.__init__(self)
+        Topo.__init__(self)
     
     def getContents(self, contents):
         hosts = contents[0]
@@ -43,15 +43,16 @@ class TreeTopo(Topo):
             self.addSwitch('s%d' % x, **sconfig)
         # Add hosts
         for y in range(1, int(host) + 1):
-            self.addHost('h%d' % y)
+	        ip = '10.0.0.%d/8' % y
+	        self.addHost('h%d' % y, ip=ip)
 
     	# Add Links
         for x in range(int(link)):
-        info = linksInfo[x].split(',')
-        host = info[0]
-        switch = info[1]
-        self.addLink(host, switch)
-            
+            info = linksInfo[x].split(',')
+            host = info[0]
+            switch = info[1]
+            self.addLink(host, switch)
+
 
 	
 	# You can write other functions as you need.
@@ -69,10 +70,14 @@ class TreeTopo(Topo):
 def startNetwork():
     info('** Creating the tree network\n')
     topo = TreeTopo()
+    controllerIP = '0.0.0.0'
+
+    if len(sys.argv) > 2:
+       controllerIP = sys.argv[2]
 
     global net
     net = Mininet(topo=topo, link = Link,
-                  controller=lambda name: RemoteController(name, ip='SERVER IP'),
+                  controller=lambda name: RemoteController(name, ip=controllerIP),
                   listenPort=6633, autoSetMacs=True)
 
     info('** Starting the network\n')
