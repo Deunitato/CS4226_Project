@@ -96,11 +96,11 @@ class Controller(EventMixin):
     # This is to handle ttl (PART 3)	
     def _handle_PortStatus(self, event):
 		log.debug("==== Noted change in ports ===")
-		action = "Modified"
+			action = "Modified"
 		if event.added:
-		action = "Added"
+			action = "Added"
 		elif event.deleted:
-		action = "Delete"
+			action = "Delete"
 		log.debug("Port %s on Switch %s has been %s." % (event.port, event.dpid, action))
 		
 		# Remove the table in our controller
@@ -110,7 +110,7 @@ class Controller(EventMixin):
     def clear_table(self):
 		new_table = {}
 		for key in self.table:
-		new_table[key] = {}
+			new_table[key] = {}
 		self.table = new_table
 
 	def _handle_ConnectionUp(self, event):
