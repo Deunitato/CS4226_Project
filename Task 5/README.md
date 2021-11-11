@@ -79,7 +79,7 @@ def assignQueues(topo):
 
 
 ## Controller
-Choice of queues is done during flow table population. In order
+Choice of queues is done during flow table population. In order to ensure that the following entry does not prioritise above a firewall, we would use the `priority` value in our `msg` to set. Note that the higher the value, the more prioritise it is.
 
 ### Code Changes
 1. Check for queue to be used, refer to the pdf. The idea is to give the premium based on the srcIP
