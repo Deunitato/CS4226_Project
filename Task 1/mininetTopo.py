@@ -10,7 +10,7 @@ from mininet.net import Mininet
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 from mininet.topo import Topo
-from mininet.link import TCLink
+from mininet.link import Link
 from mininet.node import RemoteController
 
 net = None
@@ -36,21 +36,21 @@ class TreeTopo(Topo):
         print("switch: " + switch)
         print("links: " + link)
         print("linksInfo: " + str(linksInfo))
+        
         # Add switch
         for x in range(1, int(switch) + 1):
-        sconfig = {'dpid': "%016x" % x}
-        self.addSwitch('s%d' % x, **sconfig)
+            sconfig = {'dpid': "%016x" % x}
+            self.addSwitch('s%d' % x, **sconfig)
         # Add hosts
         for y in range(1, int(host) + 1):
-        self.addHost('h%d' % y)
+            self.addHost('h%d' % y)
 
-    # Add Links
+    	# Add Links
         for x in range(int(link)):
         info = linksInfo[x].split(',')
         host = info[0]
         switch = info[1]
-        bandwidth = int(info[2])
-        self.addLink(host, switch, bw=bandwidth)
+        self.addLink(host, switch)
             
 
 	
@@ -71,7 +71,7 @@ def startNetwork():
     topo = TreeTopo()
 
     global net
-    net = Mininet(topo=topo, link = TCLink,
+    net = Mininet(topo=topo, link = Link,
                   controller=lambda name: RemoteController(name, ip='SERVER IP'),
                   listenPort=6633, autoSetMacs=True)
 
