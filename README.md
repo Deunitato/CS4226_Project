@@ -20,6 +20,8 @@ Open two console.
 
 Console 1 (Pox Controller): Run the following command
 ```shell
+cd pox # Enter pox directory
+
 ./pox.py log.level --DEBUG misc.controller
 ```
 
