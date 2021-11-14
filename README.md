@@ -1,4 +1,6 @@
 # CS4226_Project (AY21/22 Sem 1)
+This implementation of project runs on python2 and on the fangtooth branch for pox controller.
+
 
 ## Mininet Directory
 
