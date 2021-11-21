@@ -11,10 +11,9 @@ Place the files in the following directory in your mininet vm
  | - mininetTopo.py
  | - /mininet
  | - /pox
+      | - .git
       | - policy.in
-      | - /pox
-            | - misc
-                 | - controller.py
+      | - controller.py
 ```
 
 ## Running 
@@ -24,7 +23,7 @@ Console 1 (Pox Controller): Run the following command
 ```shell
 cd pox # Enter pox directory
 
-./pox.py log.level --DEBUG misc.controller
+./pox.py log.level --DEBUG controller
 ```
 
 Console 2 (mininet topology): Run the following command
@@ -39,6 +38,8 @@ By default, mininetTopo.py would look at the controller at `0.0.0.0:6633` and th
 ```shell
 sudo python mininetTopo.py [Name of topofile] [IPaddress (without the port)]
 ```
+e.g `sudo python mininetTopo.py customtopo.in 192.168.1.105` would read from the file `customtopo.in` in the current directly and search for the controller hosted at port `192.168.1.105`
+
 > Port is not configurable and always set at `6633`
 
 Reset your mininet each time testing a new instance by running
